@@ -1,0 +1,40 @@
+NB: Windows users please remove sudo at the start of each command, and run command prompt or powershell as administrator.
+
+# building a docker image
+sudo docker build -t user-oauth2 .
+
+# list existing docker containers in running state
+sudo docker ps
+
+# obtaining networking details about a container, such as network name
+sudo docker inspect mongo-container -f "{{json .NetworkSettings.Networks }}"
+
+# run an image as a docker container
+sudo docker run -d -p 8084:8084 --name oauth2-service --network springbankNet -e "SPRING_PROFILES_ACTIVE=docker" --restart always --link mongo-container user-oauth2
+
+# log into docker hub repo
+sudo docker login
+
+# taging a local docker image to a docker hub repo image
+sudo docker tag user-oauth2 campbelltechza/campbelltech:user-oauth2
+
+# push a docker image to a docker hub repository
+sudo docker push campbelltechza/campbelltech:user-oauth2
+
+# list all docker containers that are running on a docker host
+sudo docker container ls
+
+# remove a docker container
+sudo docker rm <container ID / container name>
+
+# list all docker images that have been downloaded to a docker host
+sudo docker image ls
+
+# remove a docker image
+sudo docker image rm <image name / image ID>
+
+# pull / download a docker image to a docker host
+sudo docker pull campbelltechza/campbelltech:user-oauth2
+
+# run a docker image as a container using a docker hub repo image
+sudo docker run -d -p 8084:8084 --name oauth2-service --network springbankNet -e "SPRING_PROFILES_ACTIVE=docker" --restart always --link mongo-container campbelltechza/campbelltech:user-oauth2

@@ -1,0 +1,193 @@
+
+STDIN - 0
+
+STDOUT - 1
+
+STDERR - 2
+
+> output redirection  >> for appending
+
+< Input redirection
+
+| one command output to others input
+
+ls >success.txt
+
+ls 1>success.txt
+
+ls 2>err.txt
+
+ls 1>success.txt 2>err.txt
+
+ls 1>file.txt 2>file.txt --> ls 1>file.txt 2>&1  --> ls &>file.txt
+
+
+less emp.txt 
+
+more emp.txt
+
+more -2 xyz.txt     more +4 xyz.txt
+
+head xyz.txt (top 10 lines)
+
+head -20 xyz.txt
+
+tail xyz.txt (last 10 lines)
+
+tail -12 xyz.txt
+
+head -12 xyz.txt | tail -7
+
+awk 'NR>=6 && NR<=12 {print}' xyz.txt
+
+sed -n '6,12p' xyz.txt
+
+cut -c 4-9 /etc/pswd.txt (characters)
+
+cut delimitter -- tab
+
+cut -f 2 xyz.text (2nd field)
+
+cut -d ":" -f 1 /etc/paswd
+
+cut -f -7, 9 --output-delimiter=“ “ mytext.txt 
+
+cut delimitter single character onlY
+
+Use -s option with –f to Ignore the line that do not contain a delimiter
+
+
+httpd -v | awk  -F '[ /]' ' /version/ {print}'     --> F means Field seperator [accepts patterns]
+
+awk default separator space --> tab is considered as space
+
+tr -- translate
+
+tr '[:lower:]' '[:upper:]' <xyz.txt
+
+cat xyz.txt | tr ' ' '_'   --> replacing space with underscore
+
+docker -v | cut -d ' ' -f 3 | tr -d ','  --> tr with -d deletes the character
+
+
+tee command --- display output and store output simultaneously
+
+x=4   echo $x --> 4  echo "$x" --> 4 echo '$x' --> $x
+
+bash -- case sensitive
+
+cdate=$(date)  or cdate=`date`
+
+x="hello"  y=$x or y=${x}
+
+
+
+ls -lrt | tee abc.txt
+
+ls -lrt | tee -a abc.txt  (for appending in file)
+
+
+heredoc ----> << EOF  ... EOF
+
+herestring -- <<<
+
+tr [a-z] [A-Z] <<<"Hiii"
+
+Single line comment:  #
+
+Multiline comment : either << DELIMITER ... DELIMITTER  or  : ' ... '
+
+shebang line --> path of shell --> #!/usr/bin/env bash
+
+Syntax Errors stops script execution and run time errors don’t stop script.
+
+bash -x ./bash.sh
+
+echo $? --> exit status of previous command 0 -- success      non zero(1-255) -- failure
+
+127  -- incorrect command
+1- failed during execution
+2 - invalid usage of command  // ls -xyz
+
+realpath
+
+basename
+
+dirname
+
+
+
+
+read -p "Enter your name :" my_name
+
+REPLY -- default variable for read command
+
+
+
+Command line arguments -- $1 $2 etc for two digits ${10}  -- no of arguments $# -- all arguments $@ or $*
+
+$0 -- command name
+
+
+Arthemetic operations:
+
+(()) -- integers only or bc  bash calculator 
+
+x=4 y=3 ((sum=x+y)) echo $sum
+
+((x++)) (y--)
+
+bc<<<"$x+$y"
+
+x=6 y=123 bc<<<"scale=2;$y/$x"
+
+
+
+
+case $opt in
+
+  opt1)
+      statements
+      ;;
+  opt2)
+     statements
+     ;;
+   *)
+    statements
+    ;;
+esac
+
+
+
+test 4 -eq 4        echo $?
+
+[4 -gt 5]     [[5 -lt 6]]
+
+
+2>&1 1>/dev/null  -- nullify output
+
+block of code { pwd ; ls ; date ; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
