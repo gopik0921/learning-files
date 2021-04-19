@@ -22,7 +22,7 @@ Dynamic Routing (.dynamicRouter(method(dynamicRouterBean)))
 
 
 
-@Body @Headers @Header("") @exchangeProperties
+@Body @Headers @Header("") @ExchangeProperties
 
 choice().when(simple(simple statement)).end();  choice().when(method(beanname)).end();
 

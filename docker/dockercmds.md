@@ -78,6 +78,21 @@ docker commit eab4c70b66a2 gopi/ubuntu:01
  
  docker inspect 28d81a817dfe
  
+docker-compose -f myapp.json up -d
+
+docker build -f other-Dockerfile .
+
+docker build -t vieux/apache:2.0 .
+
+You can apply multiple tags to an image
+
+docker build -t whenry/fedora-jboss:latest -t whenry/fedora-jboss:v2.1 .
+
+For example, run this command to use a directory called docker in the branch container:
+
+ docker build https://github.com/docker/rootfs.git#container:docker
+ 
+ 
  
  
  

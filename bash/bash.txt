@@ -50,11 +50,11 @@ cut -f 2 xyz.text (2nd field)
 
 cut -d ":" -f 1 /etc/paswd
 
-cut -f -7, 9 --output-delimiter=“ “ mytext.txt 
+cut -f -7, 9 --output-delimiter=â€œ â€œ mytext.txt 
 
 cut delimitter single character onlY
 
-Use -s option with –f to Ignore the line that do not contain a delimiter
+Use -s option with â€“f to Ignore the line that do not contain a delimiter
 
 
 httpd -v | awk  -F '[ /]' ' /version/ {print}'     --> F means Field seperator [accepts patterns]
@@ -71,6 +71,8 @@ docker -v | cut -d ' ' -f 3 | tr -d ','  --> tr with -d deletes the character
 
 
 tee command --- display output and store output simultaneously
+
+
 
 x=4   echo $x --> 4  echo "$x" --> 4 echo '$x' --> $x
 
@@ -99,9 +101,11 @@ Multiline comment : either << DELIMITER ... DELIMITTER  or  : ' ... '
 
 shebang line --> path of shell --> #!/usr/bin/env bash
 
-Syntax Errors stops script execution and run time errors don’t stop script.
+Syntax Errors stops script execution and run time errors donâ€™t stop script.
 
 bash -x ./bash.sh
+
+set -x
 
 echo $? --> exit status of previous command 0 -- success      non zero(1-255) -- failure
 
@@ -164,9 +168,174 @@ test 4 -eq 4        echo $?
 [4 -gt 5]     [[5 -lt 6]]
 
 
-2>&1 1>/dev/null  -- nullify output
+sudo -v 2>&1 1>/dev/null  -- nullify output
 
 block of code { pwd ; ls ; date ; }
+
+Cmd1 && Cmd2
+
+if Cmd1
+  then
+    Cmd2
+fi
+
+Cmd1 && Cmd2 || Cmd3
+
+if Cmd1
+ then
+   Cmd2
+ else
+   Cmd3
+fi
+
+
+id -u --- username        id -un --- username
+
+systemctl status docker     systemctl start docker        systemctl  stop docker
+
+cmd is success if exit status is zero
+
+[[ x =~ "x*" ]] false
+[[ x =~ x* ]] true
+
+myarray=(1 2 3 4),
+
+declare -a NewArray
+
+NewArray=( 1 3 4 5 bash scripting)
+
+echo "${NewArray[*]}"
+
+if index is string associative arrays
+
+for each in $(ls)
+do
+  if [[ -x $each ]]
+  then
+    echo "$each is having execution permission" 
+  else
+    echo "$each is not having execution permission"
+  fi
+done
+
+
+for((cnt=1;cnt<=20;cnt++))
+do
+  echo "$cnt"
+done
+
+"$*" -- all cmd arguments as single line
+"$@" -- all cmd arguments as individual
+
+break,continue  loop controlling statements
+
+for eachValue in docker nginx
+do
+echo “The service is: $eachValue
+done
+
+myServices=(docker nginx) // array
+for eachValue in ${myServices[@]}
+do
+echo “The service is: $eachValue
+done
+
+
+
+ssh user_name@remote_ip
+
+ssh remote_ip   (here remote user name is same as local terminal user)
+
+Step1: On local server generate keys using ssh-keygen
+Step2: go to user_home/.ssh then here you will find two files
+		id_rsa  (private key, it should be safe)
+		id_rsa.pub (public, this has to share with remote servers)
+Step3: use below command to share public key with remtoe server, it will ask password
+       ssh-copy-id username@remote_server_ip    
+Step4: if step3 is success then use below command to login with remote server, it wont ask password now
+        ssh username@remote_server_ip
+        
+        
+ ssh -t -o StrictHostKeyChecking=No user_name@remote_server “cmd1;cmd2;cmd3”
+ 
+ 
+sshpass -p "automation@123" ssh -t -o StrictHostKeyChecking=No automation@54.91.148.241 "date"
+or
+sshpass -f  path_for_password_file ssh -t -o StrictHostKeyChecking=No automation@54.91.148.241 "date"
+or
+export SSHPASS="automation@123"
+sshpass -e ssh -t -o StrictHostKeyChecking=No automation@54.91.148.241 "date"
+
+servers_info.txt
+----------------
+18.212.27.210  automation automation@123 date
+18.212.185.2   tomcat tomcat123 whoami
+
+execute_different_cmds_on_different_servers_with_differnt_users_and_passwords.sh
+--------------------------------------------------------------------------------
+#!/bin/bash
+while read ser user pass cmd1 cmd2
+do
+  echo "Executing $cmd1 on $ser with user as $user and password $pass"
+  sshpass -p $pass ssh -n -o StrictHostKeyChecking=No $user@$ser "$cmd1" 
+  echo "Executing $cmd2 on $ser with user as $user and password $pass"
+  sshpass -p $pass ssh -n -o StrictHostKeyChecking=No $user@$ser "$cmd2"
+  echo "---------------------------------------------------------"
+done < servers_info.txt
+
+
+myname(){  //function
+ ...cmds...
+}
+
+functions should be top of calling
+
+local p // for local variable in function
+
+return from functions either using echo or return
+prefered echo command
+
+y=$(function_name)
+
+
+
+addition()
+{
+  #echo "The \$0 value is: $0"
+  m=$1
+  n=$2
+  result=$((m+n))
+  echo "The addition of $m and $n is: $result"
+
+}
+
+x=6
+y=2
+addition $x $y
+
+p=3
+q=7
+addition $p $q
+
+addition 4 9
+
+tput_cols=113
+
+printf “format\n” “arguments”   printf "%d %s\n" "$x" "$y"
+printf “format_with_modifiers\n” “arguments”
+
+27=3^3
+
+
+
+
+
+
+       
+
+
+
+
 
 
 

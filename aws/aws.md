@@ -286,6 +286,318 @@ Global Table -- Enable Streams
 
 DynamoDB DAX Accelerator -- inmemory cache
 
+ElasticCahe for Redis -- Cahe, data store, message broker
+    supports encryption,snapshots,readrelicas,backups
+
+ElasticCahe for Memcached -- simple cache store for dynamic web applications    
+    not support encryption,snapshots,readrelicas,backups
+    
+CloudTrail -- logs changes to aws resources
+
+AWS Config -- For Auditing , Resource History and change tracking, Governance
+           -- Inventory and rules
+
+Cloudwatch  -- Monetoring and observability
+
+***AWS Shared Responsity Model***
+***Customer***
+1)Encryption of Data at rest
+2)Data Integrity
+3)Server side Encryption
+4)Password Policies
+
+
+
+AWS Pricing Policy  -- Pay-as-u-go, Pay less by using more
+
+Reserved Instances -- To reduce cost, To reserve capacity
+
+Availability Zone -- One or more Data centers
+
+A company has several AWS accounts, single bill -- Consolidated Billing service
+
+Data stored within an AWS region is not replicated outside of that region automatically. It is up to customers of AWS to determine whether they want to replicate their data to other regions. You must always consider compliance and network latency when making this decision.
+
+The five pillars of the AWS Well-Architected Framework are operational excellence, security, reliability, performance efficiency, and cost optimization.
+
+Amazon CloudFront is a content delivery network (CDN) that caches data in Edge Locations around the world. This improves performance and reduces latency for global users.
+
+A Network Load Balancer functions at the fourth layer of the Open Systems Interconnection (OSI) model. NLBs direct connections based on information at the TCP connection level
+
+AWS Reliability -- Automatically recover from failure,Test recovery procedures.
+
+Business Plan provides a response time of < 1 hour for production system down situations.
+
+S3 Standard-IA is the best storage tier for data that needs to be highly available and immediately available but is not accessed regularly.
+
+AWS Personal Health Dashboard provides alerts and remediation guidance when AWS is experiencing events that may impact you. It gives you a personalized view into the performance and availability of the AWS services underlying your AWS resources.
+
+AWS Trusted Advisor is an online tool that provides you real time guidance to help you provision your resources following AWS best practices.
+
+Cloudwatch log Insights-- system,applicatiobn,custom logs -- Cloudwatch logs agent install in ec2
+
+CloudWatch Alarms -- related metrics
+
+CloudWatch Events -- related resources
+
+Servicelens -- X-ray+Cloud watch
+
+Container insights -- To monitor container services
+
+Which of these EC2 metrics is NOT tracked by CloudWatch by default --> Memory Utilization
+
+By default, Amazon CloudWatch does NOT have access to operating system metrics like memory consumption
+
+Asynchronous Communication
+   Pull model -- Queue -- one to one 
+   Push model -- Topic -- one to many
+
+SQS -- Simple Queuing service 
+  Standard Queue -- high throughput, no order -- Visibilty Timeout, Delay Seconds, Message Retention period,MaxRecieveCount
+  FIFO Queue -- 300 messages per second(less  throughput), follows order
+  
+SNS -- Simple Notification Service
+
+SNS does not need SQS or Queue
+
+SES -- Simple Email Service(for bulk emails)
+
+Amazon MQ -- Managed message broker for Apache ActiveMQ
+
+recommended way to reduce the number of API calls that a consumer makes to SQS -- Use long Polling
+
+CDN -- Content Delivery Network
+
+Cloudfront -- if content is not available at edge location, retreived from original server and chached it.  -- Presigned urls, cookies -- GLobal servicee -- GeoRestriction
+
+200+ edge locations  
+
+Media Streaming -- Http,Rtmp
+
+AWS Shield -- to protect from DDos Attacks
+
+AWS Web Application Firewall -- Sql Injection, Cross site requests
+
+OAI -- Origin Access Identity
+
+AWS services helps you to trace requests across different components and AWS services - X-ray
+
+Amazon GuardDuty - Continuously monitor AWS environment for suspicious activity (Intelligent Threat Detection). Analyzes AWS CloudTrail events, VPC Flow Logs etc.
+
+
+IAAS
+ AWS is responsible for:
+
+- Physical Infrastructure (Hardware, Networking)
+
+- Virtualization Layer (Hypervisor, Host OS)
+
+ Customer is responsible for:
+
+- Guest OS upgrades and patches
+
+- Application Code and Runtime
+
+- Availability, Scalability etc
+
+
+AWS Shield --Protect Amazon Route 53, CloudFront, EC2 instances and Elastic Load Balancers (ELB) from DDos attacks
+
+
+DevOps in AWS
+
+** CI/CD Tools:**
+
+- AWS CodeCommit - Private source control (Git)
+
+- AWS CodePipeline - Orchestrate CI/CD pipelines
+
+- AWS CodeBuild - Build and Test Code (packages and containers)
+
+- AWS CodeDeploy - Automate Deployment(ECS, Lambda etc)
+
+**Infrastructure Provisioning**
+
+- AWS CloudFormation: Provision AWS Resources
+
+- AWS SAM (Serverless Application Model):Provision Serverless Resources
+
+**Configuration Management**
+
+- AWS Service: OpsWorks (Chef, Puppet in AWS)
+
+General Purpose (m), Compute Optimized (c), Memory Optimized (r - RAM) etc
+
+Route 53 = Domain Registrar + DNS (Domain Name Server)
+
+Amazon API Gateway - front door to your APIs
+
+**Amazon Cognito:**
+
+Add authentication and authorization to your mobile and web apps
+
+- Integrate with web identity providers (ex: Google, Facebook)
+
+- Add multi-factor authentication (MFA), phone and email verification
+
+- Sync user data across devices, platforms, and applications
+
+
+AWS Step Functions: Create a serverless workflow in 10 Minutes using a visual approach
+
+**VPC Peering**
+
+- Connect VPCs from same or different AWS accounts (across regions)
+
+- Allows private communication between the connected VPCs
+
+- Peering uses a request/accept protocol (Owner of requesting VPC sends a request)
+
+
+AWS Snowball: Transfer hundreds of terabytes to petabytes data from onpremises to AWS
+
+Four Plans: Basic (FREE), Developer ($), Business ($$), Enterprise ($$$$$$)
+
+AWS Trusted Advisor: Provides Cost optimization, performance, security & fault tolerance recommendations
+
+CloudHSM: Dedicated single-tenant HSM for regulatory compliance
+
+(Remember) AWS KMS is a multi-tenant service
+
+**Important Cloud Characteristics:**
+
+- Elasticity
+
+- On-demand resource provisioning.
+
+- Trade "capital expense (capex)" for "variable expense (opex)" (Pay-as-you-go)
+
+-  "Go global" in minutes
+
+**Technical Support**
+
+- Basic Plan - 24x7 access to customer service and forums
+
+- Developer Plan - Business hours email access to Cloud Support Associates  Unlimited cases / 1 primary contact
+
+- Business Plan - 24x7 phone, email, and chat access to Cloud Support Engineers Unlimited cases / unlimited contacts (IAM supported)
+
+- Enterprise Plan - Same as Business Plan
+
+
+Egress-Only Internet Gateways: For IPv6 subnets (NAT Gateway supports IPv4 ONLY)
+
+
+
+
+- On Demand Instances - Request when you want it. Flexible and Most Expensive.   Immediate workloads (web applications/batch programs). Applications that cannot be interrupted.
+
+- Spot Instances - Cheapest (upto 90% off). Quote the maximum price. Terminated with 2 minute notice. Cost sensitive, Fault tolerant, Non immediate workloads.
+
+- Reserved Instances - Reserve ahead of time. Upto 75% off. 1 or 3 years reservation.  Scheduled: Reserve for specific time period in a day. (5% to 10% off)  No Upfront or Partial Upfront or All Upfront Payments
+
+- Savings Plans - Commit spending $X per hour on (EC2 or AWS Fargate or Lambda).  Upto 66% off. Lot of flexibility. 1 or 3 years reservation.  No Upfront or Partial Upfront or All Upfront Payments
+
+
+
+
+**Shared Responsibility Model**
+
+- Security & Compliance - Shared responsibility:
+
+- AWS manages security of the cloud:
+
+- Operates, manages & controls Host OS and virtualization layer down to the physical security.
+
+- YOU are responsible for security in the cloud:
+
+- Guest OS (patches), Application S/W, Security Groups, Integrating AWS Services with IT environments
+
+
+
+
+
+- Public Subnet: Communication allowed - Internet to Subnet
+
+- An Internet Gateway enables internet communication for public subnets
+
+- Public Subnet: Subnet having a route to an internet gateway
+
+- Private Subnet: Subnet DOES NOT have route to an internet gateway
+
+
+
+AWS Artifact - Self-service portal for on-demand access to AWS compliance reports, certifications, accreditations, and other third-party attestations. Review, accept, and manage your agreements with AWS.
+
+Amazon Macie - Fully managed data security and privacy service  Uses machine learning to identify sensitive data in Amazon S3 (Recommendation) When migrating data to AWS use S3 for staging and Run Macie
+
+AWS Security Hub - Consolidated view of your security status in AWS. Automate security checks, manage security findings, and identify the highest priority security issues across your AWS environment.
+
+WAF -- AWS services  used to protect your web applications from web attacks by filtering traffic from a specific geographic location
+
+
+
+- AWS Pricing Calculator (NEW) - Estimate cost of your architecture solution
+
+- AWS Simple Monthly Calculator (OLD) - Estimate charges for AWS services
+
+- AWS Billing and Cost Management - Pay your AWS bill, monitor your usage
+
+- Cost Explorer - View your AWS cost data as a graph (Filter by Region, AZ, tags etc. See future cost projection.)
+
+- AWS Budgets - Create a budget (Create alerts (SNS))  Recommendation: Enable Cost allocation tags. Helps you categorize your resource costs in Cost Management.
+
+- AWS Compute Optimizer -  Recommends compute optimizations to reduce costs (Ex: Right-sizing - EC2 instance type,  Auto Scaling group configuration)
+
+AWS Managed VPN: Tunnels from VPC to on premises
+
+AWS Direct Connect (DX): Private dedicated network connection to on premises
+
+AWS Systems Manager - Run commands(operational tasks) on Amazon EC2 instances.  Manage your OS and Database patches.
+
+** AWS Trusted Advisor: **
+Provides Cost optimization, performance, security & fault tolerance recommendations
+
+- Cost Optimization: Unused resources, Other opportunities (ex: reserved instances)
+
+- Security : Settings to make your AWS solution more secure (ex: security group)
+
+- Fault Tolerance: Redundancy improvements, over-utilized resources
+
+- Performance: Improve speed and responsiveness of your AWS solutions
+
+- Service Limits: Is your usage is more than 80% of service limits?
+
+
+AWS Professional Services - Get help from AWS for your cloud migration. Get technical expertise and advise from AWS Teams for Application Migration, Application Modernization etc
+
+AWS Partner Network - Consulting and technology firms that help enterprises make the best use of AWS. Get help with design, architecture, build, connectivity and migration to AWS
+
+Amazon Kinesis:  Handle streaming data (NOT recommended for ETL Batch Jobs)
+
+Route 53 Policies:
+
+simple
+weighted
+latency
+Failover
+Geolocation
+Multivalue (8 records)
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+    
 
 
 
