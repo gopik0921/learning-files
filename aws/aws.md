@@ -577,12 +577,192 @@ Amazon Kinesis:  Handle streaming data (NOT recommended for ETL Batch Jobs)
 
 Route 53 Policies:
 
-simple
+simple (no health check)
 weighted
 latency
 Failover
 Geolocation
 Multivalue (8 records)
+
+Alias records can be created for root(in28minutes.com) and non-root domains(api.in28minutes.com)
+
+CNAME record only for non-root domains
+
+NS,A,AAAA,CNAME,SOA,MX
+
+GeoProximity -- routing policy route to the nearest resource by geographic distance to your user
+
+ETL -- Extract Transform Load
+
+Redshift --Supports Standard SQL -- Automatic replication maintains 3 copies of your data -- Run complex queries against data warehouse
+
+Redshift COPY command to load data from S3 (COPY is parallel)
+
+Amazon Data Pipeline to load data into redshit
+
+RedShift 4tier arcitecture for encryption using KMS
+Master Key
+Cluster Encryption Key
+Database Encryption Key
+Data Encryption Key
+
+in redshift exsisting columns cannot be modified
+
+RedShift Spectrum  --- Run Sql queries against datasets in s3
+  metadata configured in Redshit (Avro,Parquet etc.,)
+  
+Amazon EMR -- Elastic Map Reduce -- For Big data frameworks that need high customization
+  Managed Hadoop Service
+  We can SSH to underlying OS
+  
+Amazon Athena  -- serverless version of Redshift spectrum -- for infrequent queries it is recommended    
+
+
+EMR File System -- S3 -- recommended for Transient Clusters running Infrequent big data jobs
+
+Hadoop Distribution File System (HDFS) -- EBS -- recommended for  Clusters running long big data jobs
+
+
+AWS Data Lake  -- Glue Data Catelog(metadata for unstructered data in S3)
+  S3 and Glacier are storage services for Data lake
+  S3 Select and Glacier Select for Querying from s3 (simple SQL Queries) along with Red shift Spectrum,Athena  --(presto)
+  Analytics -- EMR, Amazon ML, Amazon QuickSight(for visulizations), Amazon Recokgnition(for image regognising)
+  
+Kinesis Firehose -- for transering streaming data to S3
+
+Snowball -- transfer onpremisis bulk data(petabytes) to AWS 
+
+Parquet -- formatof data to store in S3
+
+GZIP is recommended compression standard 
+
+Amazon ML --create and run models for predictive analytics and machine learning using data from Amazon S3, Amazon Redshift, or Amazon RDS
+
+recommended option for storing data in Data Lakes -- S3
+
+S3 Notifications
+
+DyanamoDb streams 
+
+Kinesis -- for streaming data
+  
+  Kinesis Data Streams -- process data streams -- alternative fo kafka
+  Kinesis Firehose -- save data to s3 or elasticsearch etc  -- serverless
+  Kinesis Analytics -- run quries against streaming data  -- Sql quries
+  Kinesis Video Streams -- monitor video streams -- AWS AI
+  
+TCO - Total Cost of Ownership Calculator (OLD) -  Compare Cost of running applications in AWS vs On-Premise
+
+Amazon CloudWatch Events - Act based on events on AWS resources Call a AWS Lambda function or send an email when an EC2 instance starts (ADDITIONAL FEATURE) 
+
+Schedule events - Schedule hourly call to Lambda function
+
+Amazon EventBridge (NEW!) - Extends CloudWatch Events and helps you build event driven architectures
+
+
+monitor network traffic and troubleshoot network connectivity issues (NACL and/or Security Groups misconfiguration) -- Vpc Flow logs
+
+AWS service can be used to protect your web applications from Common Vulnerabilities and Exposures (CVE) - information-security vulnerabilities and exposures -- AWS WAF
+
+Amazon Lightsail - Pre-configured development stacks in AWS - LAMP, MEAN. Run websites on WordPress.Low, predictable monthly price.
+
+Concierge Support Team--Designated Technical Account Manager (TAM) to pro-actively monitor your environment and assist with optimization and coordinate access to programs and AWS experts
+
+AWS Snowball: Transfer hundreds of terabytes to petabytes data from onpremises to AWS
+
+Use Snowmobile Trucks (100PB per truck) for dozen petabytes to exabytes
+
+Lambda@Edge -- running lambda at edge locations -- supports Node and python -- can call lambda on cloundfront events
+
+S3, EFS -- serverless
+
+Amazon Serverless Application Model -- uses Cloud Formation -- YAML file 
+  -- opensource framework to buid serverless applications
+
+Amazon Cognito -- User pools , Identity pools
+
+Amazon AppSync -- for syncing data from multiple devices to databases. -- based on graphql
+
+Amazon Step Functions:  for simple workflow
+
+Amazon Simple Workflow service (SWF) -- For complex orchecstration workflow
+
+VPC Peering: Connec VPCs belonging to same or different AWS accounts irrespective of region of the VPC (request/accept protocol) not transitive
+
+VPC EndPoint : securely connect your VPC to another service
+ two resources in AWS want to communicate without internet
+
+i) GatewayEndPoint -- S3, Dynamodb
+ii)Interface Endpoint -- Except S3,Dynamodb -- privatelink(traffic within AWS network) --ENI is needed
+
+VPC Flow Logs -- monitor network traffic
+
+Problem with response -- NACL
+
+Problem with request  -- NACL or SG
+
+AWS to On Premises::
+
+i)AWS Managed VPN -- through Internet -- Vpn Gateway , Customer Gateway
+ii)AWS Direct Connect -- private connection -- reduced costs -- consistent -- take time to establish (may be a month)
+
+Software VPN-- customer managed vpn on both sides
+
+VPN Cloudhub
+
+S3 Transfer Acceleration -- basic upto few tera bytes -- we can use edge locations
+
+AWS Snowball -- dozens of terrabytes to petabytes -- automatically encrypted -- if direct transfer takes more than a week then choose snowball -- 100TB per device
+
+AWS Snowmobile -- dozens of petabytes to exabytes --  automatically encrypted  -- 100PB per truck
+
+AWS DataSync -- transfer file storage to cloud
+
+AWS DataPipelinec--complex data processing workloads -- not for streaming data
+
+AWS Database Migration Service -- On premises database to AWS  -- syncing is possible
+
+AWS Schema Conversion Tool -- it is part of DMS -- for migration -- redshift -- syncing is not possible
+
+use private ip -- secure,less data transer cost
+
+
+CI -- continously run tests and packing
+CDeployment -- continously deploying to test environments
+CDelivery -- continously delivering to production
+
+Infrastructure Provisioning -- Terraform (cloud neutral)  CloudFormation(AWS specific)
+
+Configuration Management -- Chef,Puppet,Ansible(Cloud Neutral)  OpsWork(Aws Specific)
+
+Stack -- A group of resources created when CloudFormation template is executed.
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
 
 
 

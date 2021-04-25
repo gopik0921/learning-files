@@ -58,6 +58,50 @@ In reinforcement learning, a reward system is being used to improve the machine 
 
 P(A)= prefered/all
 
+experimental probability = where we dont  know how many success posibilities (weather prediction)
+ Flipping a coin 20 times and recording value 20 times
+  E(A) = success cases/total cases
+  These are easy to compute and serve as good predictors for theoratical probability
+
+true probability or theoratical probability = where we know how many success posibilities
+
+Probability Frequency Distribution -- A collection of probabilites for each possible outcome
+
+compliment of event -- unlikehood of happening an event;
+
+A`=1-P(A)
+
+Combinatorics --
+
+Permutations -- no of arrangements order is not important
+Variations -- total no of ways we can pick and arrange some elements of dataset
+Combinations
+
+When dealing with permutation, we can start from any position in the sample space. Convention dictates that we usually start from the first, but we can begin with any element we desire.
+
+
+Negative number dont have factorial
+
+(n+k)! = n! * (n+1)!* (n+2)! *.....(n+k)!
+
+(n-k)! = n!/(n-k+1)!*(n-k+2)*......(n!)
+
+
+V bar n to p== n^p;  -- with repetition
+n-- available no of elements
+p-- no of positions to fill
+
+**We use Variations when we have to first pick and then arrange some (but not all) elements of the sample space.**
+
+v n to p = n!/(n-p)!   -- without repetitions
+
+n-- available no of elements
+p-- no of positions to fill
+
+
+
+
+
 
 
 

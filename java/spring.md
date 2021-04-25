@@ -13,6 +13,8 @@ If we want our auto-configuration class to have priority over other auto-configu
 
 @ConditionalOnBean  @ConditionalOnMissingBean
 
+@ConditionalOnResource
+
 @ConditionalOnProperty(
   name = "usemysql", 
   havingValue = "local")
@@ -106,6 +108,93 @@ For example, the configuration property spring.main.log-startup-info would be an
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 Spring Cloud Bus provides two endpoints, /actuator/busrefresh and /actuator/busenv that correspond to individual actuator endpoints in Spring Cloud Commons, /actuator/refresh and /actuator/env respectively.
+
+ClassPathResource cr=new ClassPathResource("filename in resource");
+
+ org.springframework.core.convert.converter.Converter;
+ 
+ 
+ spring:
+  cloud:
+    gateway:
+      routes:
+        - id: userCmdApi-RegisterUser
+          uri: http://localhost:8081/api/v1/registerUser
+          predicates:
+            - Path=/api/v1/registerUser
+          filters  
+            
+
+Predicates -- Path,Method  
+
+ 
+    return webClient.get().uri("/v1/items/{id}",id)
+                .retrieve()
+                .bodyToMono(Item.class)
+                .log("Items in Client Project retrieve single Item : ");
+                
+     return webClient.get().uri("/v1/items/{id}",id)
+                .exchange()
+                .flatMap(clientResponse -> clientResponse.bodyToMono(Item.class))
+                .log("Items in Client Project retrieve single Item : ");     
+                
+                Mono<Item> itemMono = Mono.just(item);
+       return webClient.post().uri("/v1/items")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(itemMono, Item.class)
+                .retrieve()
+                .bodyToMono(Item.class)
+                .log("Created item is : ");
+                
+                                 
+ 
+Prototype scope = A new object is created each time it is injected/looked up. It will use new SomeBean() each time.
+
+Singleton scope = The same object is returned each time it is injected/looked up. Here it will instantiate one instance of SomeBean and then return it each time.
+
+Prototype bean is created at the time of usage. So when you would like to have statefull beans there is strong need sometimes to have prototypes scope or when you don't wont to cache any values in beans. Prototype bean can be associated with one session or some call.
+
+
+ApplicationContextAware – to inject ApplicationContext object, example usage is to get the array of bean definition names.
+
+BeanFactoryAware – to inject BeanFactory object, example usage is to check scope of a bean.
+
+BeanNameAware – to know the bean name defined in the configuration file.
+
+ResourceLoaderAware – to inject ResourceLoader object, example usage is to get the input stream for a file in the classpath.
+
+ServletContextAware – to inject ServletContext object in MVC application, example usage is to read context parameters and attributes.
+
+ServletConfigAware – to inject ServletConfig object in MVC application, example usage is to get servlet config parameters.
+
+
+Spring's BeanPostProcessor gives us hooks into the Spring bean lifecycle to modify its configuration.
+
+BeanPostProcessor allows for direct modification of the beans themselves.
+
+I understood that BeanFactoryPostProcessor operates on bean definition i.e. before the bean instance is getting created it gets executed and BeanPostProcessor gets executed after bean is instantiated and lifecycle events are called.
+
+After loading the bean definitions from all styles of configurations, BeanFactoryPostProcessor comes into the picture to modify the definition of some beans, and then the container instantiates the beans. Finally, BeanPostProcessor works on the beans, and it can modify and change the bean object. This is the initialization phase.
+
+postProcessBeforeInitialization
+
+postProcessAfterInitialization
+
+@PropertySource("classpath:foo.properties")
+
+@Autowired
+private Environment env;
+...
+dataSource.setUrl(env.getProperty("jdbc.url"));
+
+@TestPropertySource("/foo.properties")
+
+@TestPropertySource(properties = {"foo=bar"})
+
+@Component is a generic stereotype for any Spring-managed component. 
+
+@Repository One of the main uses of this marker is the automatic translation of exceptions using an implementation of PersistenceExceptionTranslator. DAO throws a subclass of a HibernateException (if we are using Hibernate), which is a RuntimeException. Spring will automatically convert these Hibernate specific Runtime Exceptions to Spring specific exception.
+
 
 
 

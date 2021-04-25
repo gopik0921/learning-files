@@ -50,11 +50,11 @@ cut -f 2 xyz.text (2nd field)
 
 cut -d ":" -f 1 /etc/paswd
 
-cut -f -7, 9 --output-delimiter=â€œ â€œ mytext.txt 
+cut -f -7, 9 --output-delimiter=':' mytext.txt 
 
 cut delimitter single character onlY
 
-Use -s option with â€“f to Ignore the line that do not contain a delimiter
+Use -s option with cut to Ignore the line that do not contain a delimiter
 
 
 httpd -v | awk  -F '[ /]' ' /version/ {print}'     --> F means Field seperator [accepts patterns]
@@ -101,7 +101,7 @@ Multiline comment : either << DELIMITER ... DELIMITTER  or  : ' ... '
 
 shebang line --> path of shell --> #!/usr/bin/env bash
 
-Syntax Errors stops script execution and run time errors donâ€™t stop script.
+Syntax Errors stops script execution and run time errors dont stop script.
 
 bash -x ./bash.sh
 
@@ -324,7 +324,81 @@ tput_cols=113
 printf “format\n” “arguments”   printf "%d %s\n" "$x" "$y"
 printf “format_with_modifiers\n” “arguments”
 
-27=3^3
+awk options 'pattern/condition  {action}' filename      -F field seperator  -f file  -v declare variable
+
+$0,$1,$2...
+NR 
+NF
+FILENAME
+
+awk 'BEGIN {start_action} pattern/condition {action to be performed on each line} END {stop_action}' filename
+
+awk -f awk_script.awk filename
+
+awk -F : -v x=5 -v y=6'/root/ {print $1,x,y}' /etc/passwd
+
+#!/bin/awk -f      shebang for awk scripts    ./awk_script.awk
+
+awk 'BEGIN { a=5 ; print a}'
+
+
+sed -- stream editor
+
+1) viewing file content
+2)searching
+3)find and replace
+4)insertion and deletion
+
+sed [options] commands [file_to_operate_on]
+
+sed,awk,cut -- works on each line of file
+
+to print all lines of file -- 
+  sed '' file.txt    or    sed -n 'p'  file.txt    //we can use either '' or "" for variables substitution we use ""
+  
+  sed -n '7,12p' file.txt  sed -n '5,$p' file.txt   sed -n '1-3p' file.txt
+  
+to delete line of file
+
+  sed '10,14d' file.txt  sed '10,+7d' file.txt     sed '10,+7!d' file.txt
+  
+  sed -i '10,$d' file.txt  -- to remove files in the orginal files itself
+  
+  sed -i.back '10,$d' file.txt -- to take backup 
+  
+to search in the file::
+
+  sed -n '/echo/p' file.txt  
+  
+   sed -n -e '/echo/p' -e '/bin/p' file.txt   
+   
+   sed  '/echo/d' file.txt        sed  '/echo/!d' file.txt (lines not having echo)
+   
+find and replace ::
+
+  sed 's/root/udemy' file.txt     --  first occurence of root only in  each line will be replaced
+  
+  sed 's/root/udemy/g' file .txt   --  all occurences globally
+    
+  sed 's/root/udemy/2' file .txt   --  second occurence 
+  
+  sed '/devops/s/bash/ksh' file.txt  -- find and replace
+  
+insertion::
+
+  sed '1i S_No salary' file.txt      insert before first line
+  
+   sed '1a -----------' file.txt     insert after first line
+  
+    
+  
+
+
+
+
+
+
+
 
 
 

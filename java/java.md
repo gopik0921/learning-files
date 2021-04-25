@@ -187,30 +187,6 @@ after-throwing--Run advice after the method execution, only if the method exits 
 around--Run advice before and after the advised method is invoked.
 
 
-OAuth Types:
-
-Authorization Code::
-
-The application opens a browser to send the user to the OAuth server
-The user sees the authorization prompt and approves the app’s request
-The user is redirected back to the application with an authorization code in the query string
-The application exchanges the authorization code for an access token
-
-
-Client Credentials::
-
-The Client Credentials grant is used when applications request an access token to access their own resources, not on behalf of a user.
-
-
-Device Code::
-
-While the device is waiting for the user to complete the authorization flow on their own computer or phone, the device meanwhile begins polling the token endpoint to request an access token.
-
-
-Refresh Token::
-
-The Refresh Token grant type is used by clients to exchange a refresh token for an access token when the access token has expired.
-
 BeanFactoryPostProcessor operates on bean definition i.e. before the bean instance is getting created it gets executed.
 
 BeanPostProcessor gets executed after bean is instantiated and lifecycle events are called.
@@ -256,9 +232,7 @@ JPA defines three inheritance strategies namely, SINGLE_TABLE, TABLE_PER_CLASS a
 
 Single table inheritance is default, and table per class is optional so all JPA vendors may not support it. JPA also defines mapped super class concept defined through the @MappedSuperClass annotation. A Mapped Super Class is not a persistent class, but allows a common persistable mapping to be defined for its subclasses.
 
-@Component is a generic stereotype for any Spring-managed component. 
 
-@Repository One of the main uses of this marker is the automatic translation of exceptions using an implementation of PersistenceExceptionTranslator. DAO throws a subclass of a HibernateException (if we are using Hibernate), which is a RuntimeException. Spring will automatically convert these Hibernate specific Runtime Exceptions to Spring specific exception.
 
 spring.jpa.properties.javax.persistence.sharedCache.mode=ENABLE_SELECTIVE
 
@@ -292,48 +266,7 @@ ConcurrentHashMap and CopyOnWriteArrayList implementations provide much higher c
 
 ConcurrentHashMap does not allow null keys or null values while synchronized HashMap allows one null key.
 
-Prototype scope = A new object is created each time it is injected/looked up. It will use new SomeBean() each time.
 
-Singleton scope = The same object is returned each time it is injected/looked up. Here it will instantiate one instance of SomeBean and then return it each time.
-
-Prototype bean is created at the time of usage. So when you would like to have statefull beans there is strong need sometimes to have prototypes scope or when you don't wont to cache any values in beans. Prototype bean can be associated with one session or some call.
-
-
-ApplicationContextAware – to inject ApplicationContext object, example usage is to get the array of bean definition names.
-
-BeanFactoryAware – to inject BeanFactory object, example usage is to check scope of a bean.
-
-BeanNameAware – to know the bean name defined in the configuration file.
-
-ResourceLoaderAware – to inject ResourceLoader object, example usage is to get the input stream for a file in the classpath.
-
-ServletContextAware – to inject ServletContext object in MVC application, example usage is to read context parameters and attributes.
-
-ServletConfigAware – to inject ServletConfig object in MVC application, example usage is to get servlet config parameters.
-
-
-Spring's BeanPostProcessor gives us hooks into the Spring bean lifecycle to modify its configuration.
-
-BeanPostProcessor allows for direct modification of the beans themselves.
-
-I understood that BeanFactoryPostProcessor operates on bean definition i.e. before the bean instance is getting created it gets executed and BeanPostProcessor gets executed after bean is instantiated and lifecycle events are called.
-
-After loading the bean definitions from all styles of configurations, BeanFactoryPostProcessor comes into the picture to modify the definition of some beans, and then the container instantiates the beans. Finally, BeanPostProcessor works on the beans, and it can modify and change the bean object. This is the initialization phase.
-
-postProcessBeforeInitialization
-
-postProcessAfterInitialization
-
-@PropertySource("classpath:foo.properties")
-
-@Autowired
-private Environment env;
-...
-dataSource.setUrl(env.getProperty("jdbc.url"));
-
-@TestPropertySource("/foo.properties")
-
-@TestPropertySource(properties = {"foo=bar"})
 
 
 
@@ -356,6 +289,36 @@ DFS
 
 //Finding the shortest path
 BFS
+
+int value = 15;
+assert value >= 20: " Underweight";
+System.out.println("value is "+value);
+
+java –enableassertions Test
+
+Object a=new Object();  -- possible
+
+
+    abstract class Abc<T> {
+	 void add(T t) {
+
+	}
+
+	abstract <E> void cdf(E e);
+
+	public Abc(T e) { // abstract class can have constructor
+
+	}
+
+	public Abc() { // abstract class can have constructor
+
+    	}
+    }
+    
+ ** default methods are only allowed in interfaces    
+ 
+	
+          
 
 
 
