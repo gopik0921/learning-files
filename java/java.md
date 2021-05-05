@@ -317,7 +317,104 @@ Object a=new Object();  -- possible
     
  ** default methods are only allowed in interfaces    
  
-	
+Checked Exception: The classes which directly inherit Throwable class except RuntimeException and Error are known as checked exceptions e.g. IOException, SQLException etc. Checked exceptions are checked at compile-time
+
+Has-A -- Agreegation
+
+Association -- Aggregation(Weak Association, Has-A,Car has a Driver.) and Composition(Strong Association, Part of relationship,Engine is a part of Car)	
+
+We do not use "final" keyword for Aggregation.
+
+"final" keyword is used to represent Composition.
+
+.class files -- byte code
+
+JVM specification that provides Runtime Environment -- JVM is not platform Independent. JVM help to convert byte code to machine code.
+
+
+The Just-In-Time (JIT) compiler is a component of the runtime environment that improves the performance of Java applications by compiling bytecodes to native machine code at run time.
+ 
+
+When a method has been compiled, the JVM calls the compiled code of that method directly instead of interpreting it.
+
+
+Class Loaders -- Bootstrap(rt.jar), Extensions, System(Classpath)
+
+ JVM is called virtual because it provides an interface that does not depend on the underlying operating system and machine hardware.
+ 
+Abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
+
+Nested Inner class can access any private instance variable of outer class. Like any other instance variable, we can have access modifier private, protected, public and default modifier.
+
+A subclass is class which inherits a method or methods from a superclass.
+
+Static Class Loading: Creating objects and instance using new keyword is known as static class loading. The retrieval of class definition and instantiation of the object is done at compile time.
+
+Dynamic Class Loading: Loading classes use Class.forName() method. Dynamic class loading is done when the name of the class is not known at compile time.
+
+Volatile: The volatile modifier tells the JVM that writes to the field should always be synchronously flushed to memory, and that reads of the field should always read from memory. This means that fields marked as volatile can be safely accessed and updated in a multi-thread application.
+
+Types of Memory areas allocated by the JVM:
+
+1. Classloader: Classloader is a subsystem of JVM that is used to load class files.
+2. Class(Method) Area: Class(Method) Area stores per-class structures such as the runtime constant pool, field and method data, the code for methods.
+3. Heap: It is the runtime data area in which objects are allocated.
+4. Stack: Java Stack stores frames.It holds local variables and partial results, and plays a part in method invocation and return. Each thread has a private JVM stack, created at the same time as thread.
+5. Program Counter Register: PC (program counter) register. It contains the address of the Java virtual machine instruction currently being executed.
+6. Native Method Stack: It contains all the native methods used in the application.
+
+
+Abstract method should be public,protected,default cannot be private or static or final
+
+
+Static Polymorphism also known as compile time polymorphism -- Method Overloading
+Dynamic Polymorphism also known as runtime polymorphism -- Method Overriding
+
+we cannot achieve runtime polymorphism by data members. Method is overridden not the data members, so runtime polymorphism can not be achieved by data members.
+
+In Java, all non-static methods are by default virtual functions. Only methods marked with the keyword final, which cannot be overridden, along with private methods, which are not inherited, are non-virtual.
+
+
+**Co-Variant Return Type**
+It is possible to have different return type for a overriding method in child class, but child’s return type should be sub-type of parent’s return type. Overriding method becomes variant with respect to return type. The covariant return type specifies that the return type may vary in the same direction as the subclass.
+
+
+    class SuperClass {
+      SuperClass get() {
+      System.out.println("SuperClass");
+      return this;
+      }
+    }
+    public class Tester extends SuperClass {
+     Tester get() {
+       System.out.println("SubClass");
+       return this;
+     }
+     public static void main(String[] args) {
+       SuperClass tester = new Tester();
+       tester.get();
+      }
+    }
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
           
 
 

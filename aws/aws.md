@@ -556,7 +556,7 @@ AWS Direct Connect (DX): Private dedicated network connection to on premises
 AWS Systems Manager - Run commands(operational tasks) on Amazon EC2 instances.  Manage your OS and Database patches.
 
 ** AWS Trusted Advisor: **
-Provides Cost optimization, performance, security & fault tolerance recommendations
+Provides Cost optimization, performance, security ,fault tolerance ,service limits recommendations
 
 - Cost Optimization: Unused resources, Other opportunities (ex: reserved instances)
 
@@ -737,16 +737,420 @@ Configuration Management -- Chef,Puppet,Ansible(Cloud Neutral)  OpsWork(Aws Spec
 
 Stack -- A group of resources created when CloudFormation template is executed.
 
+DDos  -- Distribute Denial of service -- millions of requests to slow down the services
+
+AWS shield -- Standard,advanced 
+
+AWS WAF -- OWASP Top 10 -- Open web Application Security Project
+           Examples :: Sql Injection,Cross Site Scripting
+         CVE -- Common Vulnerbilites and Exposures
+         Web Traffic Filtering
+         
+AWS Organisations  -- SCP --Service Control Policies 
+   AWS Resource Access Manager --- Share AWS resources with any AWS account or within organisation
+   
+            
+AWS Service Quotas 
+
+AWS Directory Services -- AWS access to on premises users without IAM users
+  1)AWS Directory Service for Microsoft AD -- >5000  trust relationship
+  2)Simple AD --<5000  no trust SAMBA4
+  3)AD Connector -- on premises  
+  
+AWS Global Accelerator -- two static IP -- EDGE locations
+
+AWS Elemental Video Convert
+
+AWS Workspaces  -- Desktop as a service -- alternative for VDI(Virtual Desktop Infrastructure)
+
+AWS Systems Parameter Store -- Manage Applications environment Configuration and Secrets
+
+AWS Secrets Manager
+
+AWS Single Sign ON
+
+SAML2 -- Security Assertion Markup Language
+
+AWS ElasticSearch                    
+
+
+**EBS Storage Types**
+Cold HDD - Infrequent access use cases (minimum cost)
+
+Throughput Optimized HDD -  Frequently accessed, large sequential operations with high throughput (cost-sensitive)
+
+General Purpose SSD - System boot volumes and transactional workloads
+
+Provisioned IOPS SSD - Transactional workloads needing very high IOPS (up to 64,000 IOPS per volume)
+
+
+
+Geoproximity - Choose the nearest resource (geographic distance) to your user.
+
+Geolocation - Configure the target based on the continent, country or state (within the United States) of the user
+
+
+Note: Creating a Static Website using Amazon S3 helps in reducing the load on EC2 instances but it does NOT help with improving latency.
+
+Amazon RDS Proxy efficiently manages database connections. It sits between client applications (including lambdas) and RDS.
+
+Important to Note: NAT Gateway has to be set up in the public subnet.
+
+Lambda@Edge can help you block unwanted bots at the edge, and let the authorized traffic go through.
+
+**Elastic Fabric Adapter (EFA)**
+
+to improve Inter-instance communication of your EC2 instances
+
+Ideal for High-Performance Computing (HPC) applications like weather modeling
+
+EFA = ENA + OS-bypass
+
+
+Multi-AZ creates a standby and improves availability.
+
+Creating Read Replicas does not help with availability.
+
+Migrating the Database to Aurora Serverless is NOT the simplest solution.
+
+
+IAM database Authentication
+
+
+**Amazon DynamoDB**
+
+Fast, scalable, distributed for any scale (Automatically partitions data as it grows)
+
+Single-digit millisecond responses for millions of transactions per second
+
+Maintains 3 replicas within the same region
+
+
+Signed URLs are recommended for
+
+- Individual application or file downloads
+
+- Situations where cookies are not supported
+
+
+
+Signed Cookies are recommended for
+
+- Securing multiple files (You have a subscriber website)
+
+- Situations where you do not want to change application URLs
+
+
+Amazon Data Life cycle Manager -- EBS Snapshots
+
+
+**Standard Queue**
+
+Unlimited throughput
+
+BUT NO guarantee of ordering (Best-Effort Ordering)
+
+and NO guarantee of exactly-once processing (some messages can be processed twice)
+
+
+
+**FIFO (first-in-first-out) Queue**
+
+First-In-First-out Delivery
+
+Exactly-Once Processing
+
+BUT throughput is  a lot lower 
+
+
+
+Choose Standard SQS queue if throughput is important
+
+Choose FIFO Queue if the order of events or exactly-once processing is important
+
+
+Deregistration delay ensures that the Load Balancer gives in-flight requests a chance to complete execution.
+
+It can be 0 to 3600 seconds (default 300 seconds).
+
+Also called Connection Draining.
+
+
+
+You can use S3 Lifecycle configuration to perform transition actions (one storage class to another) and expiration actions (delete objects)
+
+
+**Important things to remember about Hibernating instances**
+
+Only EBS backed instances can be stopped or hibernated upto 60 days
+
+Hibernating preserves RAM in the root EBS volume.
+
+Provides quick restarts for use cases with either long-running processes or slow bootup times.
+
+
+Security Groups(Defense in Depth) are default denyIf there are no rules configured, no outbound/inbound traffic is allowed.
+
+You can assign multiple (up to five) Security Groups to your EC2 instances
+
+
+**Some of the important SQS queue configuration:**
+
+Visibility timeout
+
+Other consumers will not receive a message being processed for the configured time period
+
+default - 30 seconds, min - 0, max - 12 hours
+
+
+DelaySeconds
+
+The time period before a new message is visible on the queue
+
+
+Message retention period
+
+The maximum period a message can be on the queue
+
+Default - 4 days, Min - 60 seconds, Max - 14 days
+
+
+Amazon FSx for Lustre is optimized for performance
+
+For high-performance computing (HPC), machine learning, and media processing use cases
+
+Sub-millisecond latencies, up to hundreds of gigabytes per second of throughput, and up to millions of IOPS
 
 
 
 
+DynamoDB Accelerator (DAX) is an in-memory caching solution for DynamoDB providing microsecond response times.
+
+DAX can reduce your costs by saving DynamoDB read capacity units.
+
+
+AWS CloudTrail tracks events, API calls, changes made to your AWS resources:
+
+- Who made the request?
+
+- What action was performed?
+
+- What are the parameters used?
+
+- What was the result?
+
+
+ASG Default Termination Policy -- Instances evenly across AZs. Next Priority is old instances
+
+
+Amazon S3 Object Lock prevents the deletion of objects and allows you to meet regulatory requirements.
+
+It can be enabled only on new buckets. It automatically enables versioning.
+
+
+The maximum allowed time for lambda execution is 900 seconds (default - 3 seconds).
+
+
+Creating an IAM role in the PROD AWS Account and adding DEV AWS Account as a trusted account is the recommended approach.
+
+
+Restrict access to S3 buckets only from cloudfront. Create a special user (Origin Access Identity). Associate OAI with
+Cloudfront distribution. Configure S3 Bucket policy to allow access from to OAI.
+
+
+DynamoDB Streams help you to trigger real-time events from changes to DynamoDB tables (in time-sequenced order)
+
+
+
+VPC Flow Logs helps you to monitor network traffic and troubleshoot connectivity issues (NACL and/or Security Groups misconfiguration).  You can capture traffic going in and out of your VPC (network interfaces).
+
+
+
+VPC Flow Logs can be created for:
+
+- a VPC
+
+- a subnet
+
+- or a network interface (connecting to ELB, RDS, ElastiCache, Redshift, etc)
+
+
+
+VPC Flow Logs can publish logs to Amazon CloudWatch Logs or Amazon S3.
+
+
+Multi-AZ deployments provide high availability
+
+Read Replicas provide high scalability
+
+
+**S3 Consistency Model**
+
+READ AFTER WRITE for new objects
+
+Eventual Consistency for Overwrite PUTS and DELETES
+
+
+S3 Data is highly distributed across multiple AZs and (possibly) multiple regions:
+
+When you create a new object, it is immediately available
+
+You might get a previous version of data immediately after an object update using PUT/DELETE
+
+You will never get partial or inconsistent data
+
+
+
+(Remember) Canceling a Spot request might not terminate active Spot instances
+
+To completely close a Spot request:
+
+Step 1. Cancel Spot Request
+
+Step 2. Terminate all Spot Instances
+
+
+**Redshift Workload Management**
+
+WLM can be configured to prioritize queues
+
+Create multiple queues with different concurrency level for different purposes
+
+One queue for long-running queries with low concurrency
+
+One queue for short running queries with high concurrency (up to 50 concurrent queries)
+
+
+Installing OS patches and software using user data at the launch of EC2 instances increases boot-up time. Prefer using a Customized AMI with OS patches and software pre-installed.
+
+
+AWS Security Hub - Consolidated view of your security status in AWS. Automate security checks, manage security findings, and identify the highest priority security issues across your AWS environment.
+
+Amazon S3 and EFS are auto-scaling.
+
+Multiple Geographic Locations => Multiple Regions.
+
+Read Replicas can be created in Multiple Regions
+
+Operational Excellence Pillar - Avoid/Minimize effort and problems with Provisioning servers, Deployment, Monitoring and Support
+
+Recommendations:
+
+- Use Managed Services: No worry about managing servers, availability etc
+
+- Go serverless: Prefer Lambda to EC2!
+
+- Automate with Cloud Formation: Use Infrastructure As Code
+
+- Implement CI/CD to find problems early: CodePipeline, CodeBuild, CodeDeploy
+
+- Perform frequent, small reversible changes
+
+
+VPC Endpoint - Securely connect your VPC to another service
+
+- Gateway endpoint: Securely connect to Amazon S3 and DynamoDB
+
+- Interface endpoint: Securely connect to AWS services EXCEPT FOR Amazon S3 and DynamoDB
+
+
+
+**EC2 Dedicated Hosts**
+
+- Physical servers dedicated to one customer
+
+- You have visibility into the hardware of the underlying host (sockets and physical cores)
+
+- (Use cases) Regulatory needs or server-bound software licenses like Windows Server, SQL Server
+
+
+
+Infrastructure Provisioning
+
+- AWS CloudFormation: Provision AWS Resources
+
+- AWS SAM (Serverless Application Model):Provision Serverless Resources
 
 
 
 
+- Personal Health Dashboard - Personalized alerts when AWS is experiencing events that may impact you  Provides troubleshooting guidance
 
+
+
+THREE TYPES OF IT CONTROLS
+
+- Inherited Controls (Customer fully inherits from AWS): Physical and Environmental controls
+
+- Shared Controls (Controls shared by AWS and Customer)
+
+>> Patch Management: AWS (Infrastructure Patches), Customer (Guest OS Patches and Software Patches)
+
+>> Configuration Management: AWS (Infrastructure), Customer (Guest OS, databases, and applications)
+
+>> Awareness & Training
+
+- Customer Owned Controls
+
+>> Controls based on the applications deployed to AWS
+
+>> Data Security Requirements
+
+
+Without cross-zone load balancing enabled, the NLB will distribute traffic 50/50 between AZs. As there are an odd number of instances across the two AZs some instances will not receive any traffic. Therefore enabling cross-zone load balancing will ensure traffic is distributed evenly between available instances in all AZs
+
+
+AWS Lambda is an ideal solution for running the code from this script. It can also be triggered by Amazon S3. Lambda functions can run for up to 15 minutes so each execution should complete well within this time. This is the most cost-effective solution for batch jobs.
+
+
+The "fanout" scenario is when an Amazon SNS message is sent to a topic and then replicated and pushed to multiple Amazon SQS queues, HTTP endpoints, or email addresses. This allows for parallel asynchronous processing.
+
+
+Amazon CloudFront can be used to generate custom error messages
+
+A cluster placement group is the best choice for inter-node performance.
+
+Increasing Capacity of stream --  Increase the number of shards in the Kinesis data stream
+The capacity of a stream is the sum of the capacity of its shards. Each shard provides a capacity of 1MB/sec data input and 2MB/sec data output. One shard can support up to 1000 PUT records per second.
+
+Migrating the database to an Amazon RDS multi-AZ deployment creates high availabilty for the database tier.
+
+You can use Amazon S3 and generate pre-signed URLs. These provide time-limited access to the Amazon S3 bucket to allow users to upload photos.
+
+You can copy AMIs for each EC2 instance to the second Region. This is a good way of creating a copy of your EC2 instances in another AWS Region
+New EC2 instances that are identical to the source instances can be created by launching from the copied AMIs in the second Region.
+
+The AWS Direct Connect connection will take several weeks to be installed so cannot be used for the initial data migration.
+
+An AWS Direct Connection will off the low-latency, high bandwidth and consistent performance required.
+
+With on-demand capacity mode, DynamoDB charges you for the data reads and writes your application performs on your tables. You do not need to specify how much read and write throughput you expect your application to perform because DynamoDB instantly accommodates your workloads as they ramp up or down.
+
+You cannot enable encryption for an Amazon RDS database instance after it has been created. You can only enable encryption at creation time
+Create an encrypted copy of a database snapshot. Create a new database instance from the encrypted snapshot and remove the unencrypted database instance  which will ensure encryption for all future backups (snapshots).
+
+Object versioning is a means of keeping multiple variants of an object in the same Amazon S3 bucket. Versioning provides the ability to recover from both unintended user actions and application failures. You can use versioning to preserve, retrieve, and restore every version of every object stored in your Amazon S3 bucket.
+
+ Amazon S3 cross-Region replication is used to copy objects to different regions. CRR relies on versioning which is the feature that is required for protecting against accidental deletion.
  
+ Long Polling will eliminate empty responses by allowing Amazon SQS to wait until a message is available in a queue before sending a response.
+ 
+ 
+  Amazon EBS is a block storage system. You can store any data on a block storage system including files
+  
+   For extra security, AWS recommends that you require multi-factor authentication (MFA) for all users in your account.
+   
+   AWS recommends that you create individual IAM users rather than sharing IAM user accounts.
+   
+   
+ 
+ 
+
+
+
+
+
+
  
 
 

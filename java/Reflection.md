@@ -33,7 +33,27 @@ constructor.newInstance(Person.class);  // return persons object
 if we created a constructor with parameters, then we ide wont create default constructor
 
 .setAccesible(true) //to access private fields,methods,constructors etc..,
-		
+
+
+Class.getDeclaredFields() -- Array of fields regardless of access modifiers, Excludes Inherited fields
+
+Class.getFields() -- Array of public fields only, Includes inherited fields
+
+Class.getDeclaredField(fieldName)  Class.getField(fieldName) -- NoSuchFieldException
+
+
+Synthetic Fields -- Java Compiler generates artificial fields for internal usage. We can cannot see them without Reflection
+EX: Values field in Enum
+
+field.get(instance); // to get field value from object
+
+staticField.get(null); //to get static field value 
+
+field.setAccesbile(true) // to access private or package-private fields
+ 
+class.isArray() // boolean
+
+class.getComponentType() // to get type of array		
 
     
   
