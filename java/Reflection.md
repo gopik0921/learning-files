@@ -55,5 +55,57 @@ class.isArray() // boolean
 
 class.getComponentType() // to get type of array		
 
+
+field is final we get three variations in reflection.
+
+final fields are not recommended in reflection.
+
+for static final fields we will get Exception
+
+method arguments will change in compiled class files
+
+field.set(instance,value);
+
+Object arrayObject=Array.newInstance(arrayElementType,arraylength);
+
+Array.set(arrayObject,index,value); //in for loop    arrayObject will return the final array
+
+
+@Retention
+Retention Policy:::
+
+CLASS
+Annotations are to be recorded in the class file by the compiler but need not be retained by the VM at run time.(default)
+RUNTIME
+Annotations are to be recorded in the class file by the compiler and retained by the VM at run time, so they may be read reflectively.
+SOURCE
+Annotations are to be discarded by the compiler. Ex: @override,@supresswarning
+
+Mark-in Annotations  -- Annotations without any values in it
+
+
+@Target(ElementType.Method)
+
+Meta-annotation -- Annotation that annotates other annotation
+
+the  annotation element that does not have a default value. Hence a user of the annotation must set a value to that element
+
+@Repeatable(annotation.class)
+
+.getAnnotationByType()
+
+Proxy Design Pattern
+
+Security
+
+Cache proxy
+
+lazy intialization
+
+Remote calls
+
+
+        return (T) Proxy.newProxyInstance(originalObject.getClass().getClassLoader(), interfaces, timeMeasuringProxyHandler);
+ 
     
   

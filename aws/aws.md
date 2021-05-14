@@ -1142,7 +1142,54 @@ Object versioning is a means of keeping multiple variants of an object in the sa
    
    AWS recommends that you create individual IAM users rather than sharing IAM user accounts.
    
-   
+EBS optimization ---
+Indicates whether the instance type supports EBS optimization. An EBS-optimized instance provides additional, dedicated throughput for Amazon EBS I/O. This provides improved performance for your Amazon EBS volumes and enables instances to use provisioned IOPs fully.  
+
+100 total rules per application load balancer
+5 condition values per rule
+5 wildcards per rule
+5 weighted target groups per rule
+
+ASG -- Life cycle hook, Termination policies
+
+NLB -- Lambdas not supported
+
+NLB -- Cross Zone Load Balancing and Access logs are disabled by default , Can be assigned static IP/Elastic IP
+
+ALB -- Cross Zone Load Balancing  is enabled by default
+
+
+max 7 running instances in spread placement group in single AZ
+
+max 7 partitions in single AZ
+
+only one instance type in a launch request and launch all instances together.
+
+Ipv4 -- Internet Protocol Version 4 -- Numeric 32 bit
+
+Ipv6 -- Internet Protocol Version 6 -- AlphaNumeric 128 bit
+
+CIDR block of VPC can be from /16 to /28 addresses
+
+In each subnet 5 IP address(first four,last) are reserved by AWS
+
+Address range of VPC can be extended
+
+Address range of Subnet cannot be changed
+
+Subnets are all default private
+
+NAT Gateway should be from public subnet
+
+Parameter Store -- Centralized configuration in Systems Manager
+
+
+
+
+
+
+
+ 
  
  
 

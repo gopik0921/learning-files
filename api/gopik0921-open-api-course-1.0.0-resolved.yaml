@@ -1,0 +1,283 @@
+---
+openapi: 3.0.0
+info:
+  title: OpenAPI Documentation
+  description: Sample Documentation
+  contact:
+    name: gopi
+    email: hh@ww.ll
+  license:
+    name: Apache 2.0
+    url: http://app.com/v1
+  version: 1.0.0
+servers:
+- url: https://development.gigantic-server.com/v1
+  description: Development server
+- url: https://staging.gigantic-server.com/v1
+  description: Staging server
+- url: https://api.gigantic-server.com/v1
+  description: Production server
+- url: https://{name}-localhost:{port}
+  description: local server
+  variables:
+    name:
+      default: gopi
+    port:
+      default: "8000"
+      enum:
+      - "8080"
+      - "8001"
+security:
+- BasicAuth: []
+- JwtAuthToken: []
+paths:
+  /v1/customers:
+    get:
+      tags:
+      - Customers
+      summary: list customers
+      description: getting list of customers from system
+      operationId: listCustomersV1
+      parameters:
+      - name: pageNumber
+        in: query
+        description: number of page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: size of page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: int32
+          default: 25
+      responses:
+        "200":
+          description: success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerList'
+        "404":
+          description: not found
+      security: []
+    post:
+      tags:
+      - Customers
+      summary: New Customer
+      description: Creating new customer
+      operationId: createCustomerV1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        "201":
+          description: Customer created
+          headers:
+            Location:
+              $ref: '#/components/headers/Location'
+        "400":
+          description: Bad request
+        "409":
+          description: conflict
+  /v1/customers/{custId}:
+    get:
+      tags:
+      - Customers
+      summary: customer by id
+      description: fetching single **customer** by id
+      operationId: getCustomerByIdV1
+      parameters:
+      - name: custId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: customer found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        "404":
+          description: customer doesn't exist
+      security: []
+    put:
+      tags:
+      - Customers
+      summary: Update Customer
+      description: update customer by id
+      operationId: updateCustomerV1
+      parameters:
+      - name: custId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        "204":
+          description: Customer updated
+        "400":
+          description: bad request
+        "409":
+          description: conflict
+        "404":
+          description: not found
+    delete:
+      tags:
+      - Customers
+      summary: Delete Customer
+      description: delete customer by id
+      operationId: deleteCustomerV1
+      parameters:
+      - name: custId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: customer deleted
+        "404":
+          description: Not Found
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        line1:
+          maxLength: 40
+          minLength: 5
+          type: string
+          example: 2-100b,Thurpupalem
+        city:
+          type: string
+          example: Nagaram
+        stateCode:
+          type: string
+          description: 2 letter state code
+          enum:
+          - AP
+          - TG
+          - TN
+        zipcode:
+          type: string
+          example: "522268"
+      description: address of customer
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        firstName:
+          maxLength: 100
+          minLength: 1
+          type: string
+          example: gopi
+        lastName:
+          type: string
+          example: krishna
+        address:
+          $ref: '#/components/schemas/Address'
+      description: customer object
+      allOf:
+      - $ref: '#/components/schemas/Contact'
+    CustomerList:
+      maxItems: 100
+      minItems: 1
+      type: array
+      description: list of customers
+      items:
+        $ref: '#/components/schemas/Customer'
+    Contact:
+      type: object
+      properties:
+        phone:
+          type: string
+        email:
+          type: string
+      description: contact information
+  parameters:
+    PageNumber:
+      name: pageNumber
+      in: query
+      description: number of page
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: number
+        format: int32
+        default: 1
+    PageSize:
+      name: pageSize
+      in: query
+      description: size of page
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: number
+        format: int32
+        default: 25
+    CustomerId:
+      name: custId
+      in: path
+      description: Customer Id
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: uuid
+  headers:
+    Location:
+      description: path where customer created
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: uri
+        example: http://localhost:8080/v1/customers/{assignedValue}
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    JwtAuthToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+

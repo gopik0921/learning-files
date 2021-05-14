@@ -98,5 +98,80 @@ For example, run this command to use a directory called docker in the branch con
  
 docker rename gallant_cartwright keycloak
 
+docker stats
+
+docker tag 0e5574283393 fedora/httpd:version1.0
+
+docker port  mongo-container
+
+docker run -e MYVAR1 --env MYVAR2=foo --env-file ./env.list ubuntu bash
+
+--cpu-quota
+
+--memory , -m
+
+--volumes-from
+
+--workdir , -w
+
+
+
+version: "3.9"
+services:
+  redis:
+    image: redis:alpine
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
+
+
+version: "3.9"
+services:
+  webapp:
+    build:
+      context: ./dir
+      dockerfile: Dockerfile-alternate
+      args:
+        buildno: 1
+        
+
+
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - data:/var/lib/postgresql/data
+
+volumes:
+  data:
+    external: true
+
+
+
+FROM golang:1.16 AS builder
+WORKDIR /go/src/github.com/alexellis/href-counter/
+RUN go get -d -v golang.org/x/net/html  
+COPY app.go    .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o app .
+
+FROM alpine:latest  
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=builder /go/src/github.com/alexellis/href-counter/app .
+CMD ["./app"]  
+
+
+A base image has FROM scratch in its Dockerfile.
+
+                      
+          
+
 
 
